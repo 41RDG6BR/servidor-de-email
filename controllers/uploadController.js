@@ -3,7 +3,7 @@ const SMTP_CONFIG = require('../config/smtp')
 const path = require('path');
 const fs = require('fs');
 
-const dirPath = path.resolve(__dirname, '..', '..', 'src', 'images')
+const dirPath = path.resolve(__dirname, '..', '..', 'src', 'tmp', 'uploads')
 
 exports.paginaUpload = (req, res) => {
     const titulo = req.body.title
