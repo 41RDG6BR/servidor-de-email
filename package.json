@@ -1,0 +1,23 @@
+{
+  "name": "upload-de-arquivos-back-end-com-nodejs",
+  "version": "0.0.1",
+  "description": "Upload-de-arquivos-back-end-com-NodeJS",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node src/index.js",
+    "start": "nodemon src/index.js"
+  },
+  "keywords": [
+    "Node.js"
+  ],
+  "author": "Rodrigo Nogueira",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^6.0.6",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.3",
+    "nodemailer": "^6.6.3",
+    "nodemon": "^2.0.12"
+  }
+}
