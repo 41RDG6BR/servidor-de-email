@@ -3,11 +3,25 @@ const SMTP_CONFIG = require('../config/smtp')
 const path = require('path');
 const fs = require('fs');
 
-const dirPath = path.resolve(__dirname, '..', '..', 'src', 'tmp', 'uploads')
+const rootDir = require('../util/path')
+
+// const Post = require('../models/Post')
+
+const dirPath = path.resolve(rootDir, 'tmp', 'uploads')
 
 exports.paginaUpload = (req, res) => {
     const titulo = req.body.title
     console.log(titulo)
+
+    // const { originalname: name, size, filename: key } = req.file
+
+    // const post = await Post.create({
+    //   name,
+    //   size,
+    //   key,
+    //   url: ""
+    // })
+  
     const getMostRecentFile = (dirPath) => {
       const files = orderRecentFiles(dirPath);
       return files.length ? files[0] : undefined;
@@ -25,8 +39,8 @@ exports.paginaUpload = (req, res) => {
     
     console.log(getMostRecentFile(dirPath).file, 'file')
     console.log(getMostRecentFile(dirPath).mtime, 'mtime')
-  
-    const  transporter = nodemailer.createTransport({
+
+    const transporter = nodemailer.createTransport({
       service: SMTP_CONFIG.service,
         auth: {
           user: SMTP_CONFIG.user,
@@ -38,12 +52,13 @@ exports.paginaUpload = (req, res) => {
       from: SMTP_CONFIG.user,
       to: 'rdg6design@gmail.com',
       subject: titulo,
-      text: titulo,
-      html: `<h1>Rodrigo Nogueira</h1>`,
+      text: 'aqui vai meu texto',
+      // html: 'Embedded image: <br><img src="cid:unique@kreata.ee"/>',
       attachments: [
         {
           filename: arr,
-          path: `${dirPath}/${arr}`
+          path: `${dirPath}/${arr}`,
+          // cid: 'unique@kreata.ee' 
         }
       ]
     }
@@ -52,4 +67,6 @@ exports.paginaUpload = (req, res) => {
       if(err) return console.log(err)
       console.log('E-mail enviado com sucesso!!!')
     })
+
+  res.send('Arquivo enviado com sucesso!!!')
 }
