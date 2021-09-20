@@ -5,23 +5,12 @@ const fs = require('fs');
 
 const rootDir = require('../util/path')
 
-// const Post = require('../models/Post')
-
 const dirPath = path.resolve(rootDir, 'tmp', 'uploads')
 
-exports.paginaUpload = (req, res) => {
+exports.pageUpload = (req, res) => {
     const titulo = req.body.title
     console.log(titulo)
 
-    // const { originalname: name, size, filename: key } = req.file
-
-    // const post = await Post.create({
-    //   name,
-    //   size,
-    //   key,
-    //   url: ""
-    // })
-  
     const getMostRecentFile = (dirPath) => {
       const files = orderRecentFiles(dirPath);
       return files.length ? files[0] : undefined;
@@ -53,12 +42,10 @@ exports.paginaUpload = (req, res) => {
       to: 'rdg6design@gmail.com',
       subject: titulo,
       text: 'aqui vai meu texto',
-      // html: 'Embedded image: <br><img src="cid:unique@kreata.ee"/>',
       attachments: [
         {
           filename: arr,
           path: `${dirPath}/${arr}`,
-          // cid: 'unique@kreata.ee' 
         }
       ]
     }
