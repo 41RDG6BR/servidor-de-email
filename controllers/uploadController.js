@@ -24,7 +24,7 @@ exports.pageUpload = (req, res) => {
         .sort((a, b) => b.mtime.getTime() - a.mtime.getTime());
     };
   
-    const arr = getMostRecentFile(dirPath).file
+    let rFile = getMostRecentFile(dirPath).file
     
     console.log(getMostRecentFile(dirPath).file, 'file')
     console.log(getMostRecentFile(dirPath).mtime, 'mtime')
@@ -44,8 +44,8 @@ exports.pageUpload = (req, res) => {
       text: 'aqui vai meu texto',
       attachments: [
         {
-          filename: arr,
-          path: `${dirPath}/${arr}`,
+          filename: rFile,
+          path: `${dirPath}/${rFile}`,
         }
       ]
     }
